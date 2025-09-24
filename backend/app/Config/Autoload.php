@@ -38,7 +38,10 @@ class Autoload extends AutoloadConfig
      * @var array<string, list<string>|string>
      */
     public $psr4 = [
-        APP_NAMESPACE => APPPATH,
+        APP_NAMESPACE => APPPATH,         // usually "App" => "app/"
+        'Config'        => APPPATH . 'Config',
+        // you can add more namespaces if you have modules or packages
+        // 'SomeLibrary' => ROOTPATH . 'some/library/path',
     ];
 
     /**
@@ -53,12 +56,14 @@ class Autoload extends AutoloadConfig
      *
      * Prototype:
      *   $classmap = [
-     *       'MyClass'   => '/path/to/class/file.php'
+     *       'MyClass'   => APPPATH . 'ThirdParty/MyClass.php',
      *   ];
      *
      * @var array<string, string>
      */
-    public $classmap = [];
+    public $classmap = [
+        // 'SomeClass' => APPPATH . 'Libraries/SomeClass.php',
+    ];
 
     /**
      * -------------------------------------------------------------------
@@ -75,7 +80,9 @@ class Autoload extends AutoloadConfig
      *
      * @var list<string>
      */
-    public $files = [];
+    public $files = [
+        // e.g. APPPATH . 'Helpers/some_helper.php',
+    ];
 
     /**
      * -------------------------------------------------------------------
@@ -84,9 +91,10 @@ class Autoload extends AutoloadConfig
      * Prototype:
      *   $helpers = [
      *       'form',
+     *       'url',
      *   ];
      *
      * @var list<string>
      */
-    public $helpers = [];
+    public $helpers = ['url'];  // <-- added 'url' so base_url(), site_url() work everywhere
 }

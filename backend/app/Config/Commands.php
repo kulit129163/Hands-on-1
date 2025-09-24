@@ -1,15 +1,18 @@
 <?php
 
-namespace Config;
+namespace App\Commands;
 
-use CodeIgniter\Commands\Commands as BaseCommands;
+use CodeIgniter\CLI\BaseCommand;
+use CodeIgniter\CLI\CLI;
 
-class Commands extends BaseCommands
+class HealthCheck extends BaseCommand
 {
-    /**
-     * @var array<string, string>
-     */
-    protected $commands = [
-        'health:check' => \App\Commands\HealthCheck::class,
-    ];
+    protected $group       = 'custom';          // Command group (optional)
+    protected $name        = 'health:check';    // Command name
+    protected $description = 'Runs a health check on the application.';
+
+    public function run(array $params)
+    {
+        CLI::write('✅ Application is healthy!', 'green');
+    }
 }
